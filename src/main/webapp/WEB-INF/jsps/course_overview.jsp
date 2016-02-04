@@ -2,16 +2,15 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>课程信息</title>
-<link ref="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/main.css" />
-</head>
+<jsp:include page="top.jsp" />
 <body>
 	<div id="main">
 		<div class="newcontainer" id="course_intro">
-			<div class="course-title">${course.title}</div>
+			<div class="course-title">${course.title} 
+			<a href="/courses/admin?add">添加课程</a>&nbsp;
+			<a href="/courses/upload">上传单个文件</a>&nbsp;
+			<a href="/courses/upload?multi=true">上传多个文件</a>&nbsp;
+			 </div>
 			<div class="course_info">
 				<div class="course-embed l">
 					<div id="js-course-img" class="img-wrap">

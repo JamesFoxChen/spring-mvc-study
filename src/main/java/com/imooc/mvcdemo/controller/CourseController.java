@@ -83,9 +83,9 @@ public class CourseController {
 
 		log.debug("Info of Course:");
 		log.debug(ReflectionToStringBuilder.toString(course));
-
+		
 		// 在此进行业务操作，比如数据库持久化
-		course.setCourseId(123);
+		course.setCourseId(course.getCourseId());
 		return "redirect:view2/" + course.getCourseId();
 	}
 
