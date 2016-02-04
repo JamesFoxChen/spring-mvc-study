@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -44,11 +45,15 @@ public class CourseController {
 
 	// 本方法将处理 /courses/view?courseId=123 形式的URL
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String viewCourse(@RequestParam("courseId") Integer courseId, Model model) {
-
-		log.debug("In viewCourse, courseId = {}", courseId);
+	public String viewCourse(@RequestParam("courseId") Integer courseId, Model model, HttpSession httpSession) {
+		//log.debug("In viewCourse, courseId = {}", courseId);
 		Course course = courseService.getCoursebyId(courseId);
 		model.addAttribute(course);
+
+		httpSession.setAttribute("sessionDemo", course);
+		
+		System.err.println("Session Set:");
+		System.err.println(course);
 		return "course_overview";
 	}
 
@@ -83,7 +88,7 @@ public class CourseController {
 
 		log.debug("Info of Course:");
 		log.debug(ReflectionToStringBuilder.toString(course));
-		
+
 		// 在此进行业务操作，比如数据库持久化
 		course.setCourseId(course.getCourseId());
 		return "redirect:view2/" + course.getCourseId();
